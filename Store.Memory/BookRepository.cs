@@ -10,6 +10,7 @@ namespace Store.Memory
             new Book(1,"ISBN 12345-12345","D. Knuth", "Art of Programming"),
             new Book(2,"ISBN 12345-12346","M. Fowler", "Refactoring"),
             new Book(3,"ISBN 12345-12347","B. Kernigan", "C programming Language"),
+            new Book(4,"ISBN 12345-12348","B. Kernigan", "C# programming Language"),
         };
 
         public Book[] GetAllByIsbn(string isbn)
