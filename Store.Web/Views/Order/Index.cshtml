@@ -13,6 +13,7 @@
             <th scope="col">Название</th>
             <th scope="col">Колличество</th>
             <th scope="col">Цена</th>
+            <th scope="col"></th>
         </tr>
     </thead>
 
@@ -25,6 +26,12 @@
                 <td>@Model.Items[i].Title</td>
                 <td class="text-right">@Model.Items[i].Count</td>
                 <td class="text-right">@Model.Items[i].Price</td>
+                <td class="text-center">
+                    <form class="form-inline" action="@Url.Action("RemoveItem", "Order")" method="post">
+                        <input type="hidden" name="bookId" value="@Model.Items[i].BookId"/>
+                        <button class="btn btn-danger" type="submit">Удалить</button>
+                    </form>
+                </td>
             </tr>
         }
             <tr>
@@ -33,6 +40,7 @@
                 <td class="text-right">Итого:</td>
                 <td class="text-right">@Model.TotalCount</td>
                 <td class="text-right">@Model.TotalPrice</td>
+                <td></td>
             </tr>
     </tbody>
 </table>

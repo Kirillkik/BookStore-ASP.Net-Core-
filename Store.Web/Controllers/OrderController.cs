@@ -51,7 +51,7 @@ namespace Store.Web.Controllers
             order.GetItem(bookId).Count = count;
             SaveOrderAndCart(order, cart);
 
-            return RedirectToAction("Index", "Book", new { id = bookId });
+            return RedirectToAction("Index", "Order");
         }
 
         public IActionResult RemoveItem(int bookId)
@@ -61,7 +61,7 @@ namespace Store.Web.Controllers
             order.RemoveItem(bookId);
             SaveOrderAndCart(order, cart);
 
-            return RedirectToAction("Index", "Book", new { id = bookId });
+            return RedirectToAction("Index", "Order");
         }
 
         private void SaveOrderAndCart(Order order, Cart cart)
