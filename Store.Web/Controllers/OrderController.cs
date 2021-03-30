@@ -31,12 +31,51 @@ namespace Store.Web.Controllers
             return View("Empty");
         }
 
-        public IActionResult AddItem(int id)
+        public IActionResult AddItem(int bookId,int count = 1)
+        {
+            (Order order, Cart cart) = GetOrderAndCart();
+
+            var book = bookRepository.GetById(bookId);
+
+            order.AddOrUpdateItem(book, count);
+
+            SaveOrderAndCart(order, cart);
+
+            return RedirectToAction("Index", "Book", new { id = bookId });
+        }
+
+        public IActionResult UpdateItem(int bookId, int count)
+        {
+            (Order order, Cart cart) = GetOrderAndCart();
+
+            order.GetItem(bookId).Count = count;
+            SaveOrderAndCart(order, cart);
+
+            return RedirectToAction("Index", "Order");
+        }
+
+        public IActionResult RemoveItem(int bookId)
+        {
+            (Order order, Cart cart) = GetOrderAndCart();
+
+            order.RemoveItem(bookId);
+            SaveOrderAndCart(order, cart);
+
+            return RedirectToAction("Index", "Order");
+        }
+
+        private void SaveOrderAndCart(Order order, Cart cart)
+        {
+            orderRepository.Update(order);
+            cart.TotalCount = order.TotalCount;
+            cart.TotalPrice = order.TotalPrice;
+            HttpContext.Session.Set(cart);
+        }
+
+        private (Order order, Cart cart) GetOrderAndCart()
         {
             Order order;
-            Cart cart;
-
-            if (HttpContext.Session.TryGetCart(out cart))
+            if(HttpContext.Session.TryGetCart(out Cart cart))
             {
                 order = orderRepository.GetById(cart.OrderId);
             }
@@ -46,16 +85,7 @@ namespace Store.Web.Controllers
                 cart = new Cart(order.Id);
             }
 
-            var book = bookRepository.GetById(id);
-            order.AddItem(book, 1);
-            orderRepository.Update(order);
-
-            cart.TotalCount = order.TotalCount;
-            cart.TotalPrice = order.TotalPrice;
-
-            HttpContext.Session.Set(cart);
-
-            return RedirectToAction("Index", "Book", new { id });
+            return (order, cart);
         }
 
         private OrderModel Map(Order order)
@@ -80,5 +110,6 @@ namespace Store.Web.Controllers
                 TotalPrice = order.TotalPrice,
             };
         }
+
     }
 }
