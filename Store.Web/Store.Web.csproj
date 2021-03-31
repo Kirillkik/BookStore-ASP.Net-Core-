@@ -16,6 +16,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Update="Views\Order\DeliveryMethod.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Order\DeliveryStep.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
     <Content Update="Views\Order\Empty.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>

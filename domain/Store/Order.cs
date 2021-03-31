@@ -47,7 +47,6 @@ namespace Store
             }
         }
 
-        // TODO Cover unit tests
         public void RemoveItem(int bookId)
         {
             int index = items.FindIndex(item => item.BookId == bookId);
