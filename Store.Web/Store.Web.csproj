@@ -19,6 +19,9 @@
     <Content Update="Views\Order\Empty.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
+    <Content Update="Views\Order\Confirmation.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
     <Content Update="Views\Order\Index.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>

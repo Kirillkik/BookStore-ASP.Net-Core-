@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Store.Memory;
+using Store.Messages;
 
 namespace Store.Web
 {
@@ -43,6 +44,7 @@ namespace Store.Web
 
             services.AddSingleton<IBookRepository, BookRepository>();
             services.AddSingleton<IOrderRepository, OrderRepository>();
+            services.AddSingleton<INotificationService, DebugNotificationService>();
             services.AddSingleton<BookService>();
         }
 
